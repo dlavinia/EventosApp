@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html xmlns:th="https://thymeleaf.org"
+xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head>
+    <!--Bootstrap-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="style/style.css">
+
+
+    <!--Icons-->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <meta charset="UTF-8">
+    <title>EVENTOS APP</title>
+
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+              <div class="navbar-header">
+                <a class="navbar-brand" href="/eventos"><h3>DETALHES DO EVENTO</h3></a>
+              </div>
+              <ul class="nav navbar-nav">
+                <li class="active"> <li class="active"> <a href="/eventos" class="btn btn-primary">Voltar para eventos</a></li>
+              </ul>
+            </div>
+          </nav>
+    </header>
+    
+    <div class="container">
+    <section>
+        <h3>Detalhes</h3>
+            <table class="table container "> 
+                <thead>
+                    <tr>
+                        <th>NOME</th>
+                        <th>LOCAL</th>
+                        <th>DATA</th>
+                        <th>HORARIO</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th><span th:text="${evento.nome}"></span></th>
+                        <th><span th:text="${evento.local}"></span></th>
+                        <th><span th:text="${evento.data}"></span></th>
+                        <th><span th:text="${evento.horario}"></span></th>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+            <section>
+            <h3>Adicionar convidados</h3>
+            <form method="POST">
+                <div class="form-group row">
+                    <div class="col-lg-6">
+                     <p>Nome: <input class="form-control" type="text" value="" name="nomeConvidado"></p>
+                    </div>
+                    <div class="col-lg-6">
+                     <p>Rg: <input class="form-control" type="text" value="" name="rg"></p>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary" style="float:right ;">Adicionar</button>
+            </form>
+        </section>
+            
+        <section>
+            <h2>Lista de convidados</h2>
+           
+            <table class="table table-hover container ">
+                <thead>
+                    <tr>
+                        <th>NOME</th>
+                        <th>RG</th>
+                        <th>DELETAR</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="convidado : ${convidados}">
+                        <th><span th:text = ${convidado.nomeConvidado}></span></th>
+                        <th><span th:text = ${convidado.rg}></span></th>
+                        <th><a th:href="${(#mvc.url('EC#deletarConvidado').arg(0, convidado.rg)).build()}"><i class="material-icons">delete</i></a></th>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </div>
+
+    
+   
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script> 
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+</body>
+
+</html>
